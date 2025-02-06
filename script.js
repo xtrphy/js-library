@@ -10,13 +10,7 @@ const numberInput = document.querySelector('.number-input');
 const yesInput = document.querySelector('.yes-input');
 const noInput = document.querySelector('.no-input');
 
-let myLibrary = [{
-  id: Date.now(),
-  title: 'Robinson Crusoe',
-  author: 'Daniel Defoe',
-  pages: '198',
-  isReaded: 'Yes'
-}];
+let myLibrary = [];
 
 function Book(title, author, pages, isReaded) {
   this.id = Date.now();
@@ -75,11 +69,10 @@ function displayBook() {
       deleteBtn.classList.add('delete-btn');
       deleteBtn.innerText = 'Delete';
       deleteBtn.addEventListener('click', () => deleteBook(book.id));
-      bookEl.appendChild(deleteBtn);
 
       const changeStatusBtn = document.createElement('button');
       changeStatusBtn.classList.add('change-status-btn');
-      changeStatusBtn.innerText = 'Change status';
+      changeStatusBtn.innerText = 'Change Status';
       changeStatusBtn.addEventListener('click', () => {
         book.toggleReadStatus();
         displayBook();
