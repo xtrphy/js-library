@@ -9,3 +9,140 @@
 body {
   font-family: 'Rubik', sans-serif;
 }
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title {
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.books-container {
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid #000;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.book {
+  font-size: 1.15rem;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+.book:last-child {
+  margin-bottom: 0;
+}
+
+.new-book-btn {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007BFF;
+  color: white;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.new-book-btn:hover {
+  background-color: #0056b3;
+}
+
+/* Modal styles */
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+  background: #fff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  width: 300px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.modal h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modal label {
+  font-size: 0.9em;
+  color: #555;
+}
+
+.modal input[type="text"],
+.modal input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 0.9em;
+}
+
+.modal fieldset {
+  border: none;
+  padding: 0;
+}
+
+.modal legend {
+  font-size: 0.9em;
+  color: #555;
+  margin-bottom: 16px;
+}
+
+.modal .radio-group {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.modal button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007BFF;
+  color: white;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modal button:hover {
+  background-color: #0056b3;
+}
+
+/* ====================== */

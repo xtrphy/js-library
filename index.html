@@ -10,7 +10,51 @@
 
 <body>
 
-  <h1>Hello World!</h1>
+  <div class="container">
+
+    <h1 class="title">Book Library</h1>
+
+    <p class="subtitle">Your books:</p>
+
+    <div class="books-container">
+
+    </div>
+
+    <button class="new-book-btn">New Book</button>
+
+
+  </div>
+
+  <dialog class="modal">
+
+    <h2>Add a New Book</h2>
+    <form id="book-form">
+      <label for="title">Title:</label>
+      <input class="title-input" type="text" id="title" name="title" required>
+
+      <label for="author">Author:</label>
+      <input class="author-input" type="text" id="author" name="author" required>
+
+      <label for="pages">Number of Pages:</label>
+      <input class="number-input" type="number" id="pages" name="pages" required>
+
+      <fieldset>
+        <legend>Have you read it?</legend>
+        <div class="radio-group">
+          <label for="read-yes">
+            <input class="yes-input" type="radio" id="read-yes" name="read" value="yes" required> Yes
+          </label>
+          <label for="read-no">
+            <input class="no-input" type="radio" id="read-no" name="read" value="no" required> No
+          </label>
+        </div>
+      </fieldset>
+
+      <button type="submit">Add Book</button>
+    </form>
+
+  </dialog>
+
 
   <script src="script.js"></script>
 </body>
