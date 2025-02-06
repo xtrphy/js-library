@@ -37,14 +37,21 @@ body {
 
 .book {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 10px;
   font-size: 1.15rem;
   font-weight: 400;
   line-height: 2.5rem;
   border: 1px solid black;
   border-radius: 8px;
-  padding: 20px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.book-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 .new-book-btn {
@@ -63,24 +70,37 @@ body {
 }
 
 .delete-btn {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 5px;
   background-color: #e12a2a;
-  color: white;
-  font-size: 0.8em;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-left: 18px;
 }
 
 .delete-btn:hover {
   background-color: #a50000;
 }
 
+.change-status-btn {
+  background-color: #00be29;
+}
+
+.change-status-btn:hover {
+  background-color: #00821c;
+}
+
+.delete-btn,
+.change-status-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  font-size: 0.8em;
+  transition: background-color 0.3s;
+  margin-left: 18px;
+}
+
 /* Modal styles */
 
-.modal {
+.modal,
+.change-modal {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -93,6 +113,7 @@ body {
   width: 300px;
   animation: fadeIn 0.3s ease-in-out;
 }
+
 
 @keyframes fadeIn {
   from {

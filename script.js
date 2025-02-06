@@ -4,13 +4,21 @@ const modal = document.querySelector('.modal');
 const bookForm = document.getElementById('book-form');
 const submitBtn = document.querySelector('.submit-btn');
 
+const changeModal = document.querySelector('.change-modal');
+
 const titleInput = document.querySelector('.title-input');
 const authorInput = document.querySelector('.author-input');
 const numberInput = document.querySelector('.number-input');
 const yesInput = document.querySelector('.yes-input');
 const noInput = document.querySelector('.no-input');
 
-let myLibrary = [];
+let myLibrary = [{
+  id: Date.now(),
+  title: 'Robinson Crusoe',
+  author: 'Daniel Defoe',
+  pages: '198',
+  isReaded: 'Yes'
+}];
 
 function Book(title, author, pages, isReaded) {
   this.id = Date.now();
@@ -19,6 +27,10 @@ function Book(title, author, pages, isReaded) {
   this.pages = pages;
   this.isReaded = isReaded;
 }
+
+Book.prototype.toggleReadStatus = function () {
+  this.isReaded = this.isReaded === 'Yes' ? 'No' : 'Yes';
+};
 
 function collectInputValues() {
   const modalInputs = document.querySelectorAll('.modal input');
@@ -56,7 +68,10 @@ function displayBook() {
       const bookEl = document.createElement('div');
       bookEl.classList.add('book');
       bookEl.dataset.id = book.id;
-      bookEl.innerHTML = `${book.title} is written by ${book.author} and has ${book.pages} pages. <br> Have you read it? ${book.isReaded}`;
+      bookEl.innerHTML = `${book.title} is written by ${book.author} and has ${book.pages} pages. <br> Readed? ${book.isReaded}`;
+
+      const buttonContainer = document.createElement('div');
+      buttonContainer.classList.add('book-buttons');
 
       const deleteBtn = document.createElement('button');
       deleteBtn.classList.add('delete-btn');
@@ -64,6 +79,18 @@ function displayBook() {
       deleteBtn.addEventListener('click', () => deleteBook(book.id));
       bookEl.appendChild(deleteBtn);
 
+      const changeStatusBtn = document.createElement('button');
+      changeStatusBtn.classList.add('change-status-btn');
+      changeStatusBtn.innerText = 'Change status';
+      changeStatusBtn.addEventListener('click', () => {
+        book.toggleReadStatus();
+        displayBook();
+      });
+
+      buttonContainer.appendChild(deleteBtn);
+      buttonContainer.appendChild(changeStatusBtn);
+
+      bookEl.appendChild(buttonContainer);
       bookContainer.append(bookEl);
     });
   }
