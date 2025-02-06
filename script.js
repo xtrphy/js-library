@@ -10,47 +10,70 @@ const numberInput = document.querySelector('.number-input');
 const yesInput = document.querySelector('.yes-input');
 const noInput = document.querySelector('.no-input');
 
-const myLibrary = [];
-
-function addBookToLibrary(title, author, pages, isReaded) {
-  const book = {
-    title: title,
-    author: author,
-    pages: pages,
-    isReaded: isReaded
-  };
-  return book;
-}
-
-const newBook = addBookToLibrary('Robinson Crusoe', 'Daniel Defo', '300', 'Readed');
-
-myLibrary.push(newBook);
-
-console.log(myLibrary);
-
-function displayBook() {
-  myLibrary.forEach((book) => {
-    const bookContainer = document.querySelector('.books-container');
-
-    const bookEl = document.createElement('p');
-    bookEl.classList.add('book');
-    bookEl.innerText = `${book.title} is written by ${book.author} and has ${book.pages} pages. Status: ${book.isReaded}`;
-
-    bookContainer.append(bookEl);
-  });
-}
-
-displayBook();
+let myLibrary = [];
 
 function Book(title, author, pages, isReaded) {
+  this.id = Date.now();
   this.title = title;
   this.author = author;
   this.pages = pages;
   this.isReaded = isReaded;
 }
 
-const book1 = new Book('Mysterious island', 'Jules Verne', '320', 'Not readed');
-myLibrary.push(book1);
+function collectInputValues() {
+  const modalInputs = document.querySelectorAll('.modal input');
+
+  const inputValues = Array.from(modalInputs).map(input => {
+    if (input.type === 'radio' && input.name === 'read') {
+      return document.querySelector('input[name="read"]:checked').value;
+    }
+    return input.value;
+  });
+
+  const newBook = new Book(
+    inputValues[0],
+    inputValues[1],
+    inputValues[2],
+    inputValues[3]
+  );
+
+  myLibrary.push(newBook);
+  displayBook();
+}
+
+function displayBook() {
+  const bookContainer = document.querySelector('.books-container');
+  bookContainer.innerHTML = '';
+
+  if (myLibrary.length === 0) {
+    const emptyEl = document.createElement('p');
+    emptyEl.classList.add('empty');
+    emptyEl.innerText = `You didn't add any book yet`;
+
+    bookContainer.append(emptyEl);
+  } else {
+    myLibrary.forEach(book => {
+      const bookEl = document.createElement('div');
+      bookEl.classList.add('book');
+      bookEl.dataset.id = book.id;
+      bookEl.innerHTML = `${book.title} is written by ${book.author} and has ${book.pages} pages. <br> Have you read it? ${book.isReaded}`;
+
+      const deleteBtn = document.createElement('button');
+      deleteBtn.classList.add('delete-btn');
+      deleteBtn.innerText = 'Delete';
+      deleteBtn.addEventListener('click', () => deleteBook(book.id));
+      bookEl.appendChild(deleteBtn);
+
+      bookContainer.append(bookEl);
+    });
+  }
+}
+
+function deleteBook(bookId) {
+  myLibrary = myLibrary.filter(book => book.id !== bookId);
+
+  displayBook();
+}
 
 newBookBtn.addEventListener('click', () => {
   modal.showModal();
@@ -58,6 +81,9 @@ newBookBtn.addEventListener('click', () => {
 
 bookForm.addEventListener('submit', (e) => {
   e.preventDefault();
-  alert('Book added succesfully!');
+  collectInputValues();
+  bookForm.reset();
   modal.close();
 });
+
+displayBook();
