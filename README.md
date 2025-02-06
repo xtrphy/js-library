@@ -1,1 +1,1 @@
-# js-library
+# JS Library
