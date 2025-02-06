@@ -4,8 +4,6 @@ const modal = document.querySelector('.modal');
 const bookForm = document.getElementById('book-form');
 const submitBtn = document.querySelector('.submit-btn');
 
-const changeModal = document.querySelector('.change-modal');
-
 const titleInput = document.querySelector('.title-input');
 const authorInput = document.querySelector('.author-input');
 const numberInput = document.querySelector('.number-input');
@@ -68,7 +66,7 @@ function displayBook() {
       const bookEl = document.createElement('div');
       bookEl.classList.add('book');
       bookEl.dataset.id = book.id;
-      bookEl.innerHTML = `${book.title} is written by ${book.author} and has ${book.pages} pages. <br> Readed? ${book.isReaded}`;
+      bookEl.innerHTML = `${book.title} is written by ${book.author} and has ${book.pages} pages. <br> <br> Readed? ${book.isReaded}`;
 
       const buttonContainer = document.createElement('div');
       buttonContainer.classList.add('book-buttons');
