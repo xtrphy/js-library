@@ -12,17 +12,19 @@ const noInput = document.querySelector('.no-input');
 
 let myLibrary = [];
 
-function Book(title, author, pages, isReaded) {
-  this.id = Date.now();
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.isReaded = isReaded;
-}
+class Book {
+  constructor(title, author, pages, isReaded) {
+    this.id = Date.now();
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.isReaded = isReaded;
+  }
 
-Book.prototype.toggleReadStatus = function () {
-  this.isReaded = this.isReaded === 'Yes' ? 'No' : 'Yes';
-};
+  toggleReadStatus() {
+    this.isReaded = this.isReaded === 'Yes' ? 'No' : 'Yes';
+  };
+}
 
 function collectInputValues() {
   const modalInputs = document.querySelectorAll('.modal input');
