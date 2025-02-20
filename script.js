@@ -10,6 +10,11 @@ const numberInput = document.querySelector('.number-input');
 const yesInput = document.querySelector('.yes-input');
 const noInput = document.querySelector('.no-input');
 
+const titleError = document.getElementById('title-error');
+const authorError = document.getElementById('author-error');
+const numberError = document.getElementById('number-error');
+const radioError = document.getElementById('radio-error');
+
 let myLibrary = [];
 
 class Book {
@@ -99,11 +104,54 @@ newBookBtn.addEventListener('click', () => {
   modal.showModal();
 });
 
-bookForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  collectInputValues();
-  bookForm.reset();
-  modal.close();
+const fields = [
+  { input: document.getElementById('title'), error: document.getElementById('title-error') },
+  { input: document.getElementById('author'), error: document.getElementById('author-error') },
+  { input: document.getElementById('pages'), error: document.getElementById('number-error') },
+  { input: document.querySelector('input[name="read"]'), error: document.getElementById('radio-error') },
+];
+
+function validateField(field) {
+  const { input, error } = field;
+
+  if (input.type === 'radio') {
+    const radioGroup = document.querySelectorAll(`input[name="${input.name}"]`);
+    const isChecked = Array.from(radioGroup).some(radio => radio.checked);
+    error.textContent = isChecked ? "" : "Please select an option!";
+    return isChecked;
+  }
+
+  if (!input.value.trim()) {
+    error.textContent = "This field is required!";
+    input.classList.add('invalid');
+    return false;
+  } else {
+    error.textContent = "";
+    input.classList.remove('invalid');
+    return true;
+  }
+}
+
+bookForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  let isValid = true;
+
+  fields.forEach(field => {
+    if (!validateField(field)) {
+      isValid = false;
+    }
+  });
+
+  if (isValid) {
+    collectInputValues();
+    bookForm.reset();
+    modal.close();
+  }
+});
+
+fields.forEach(field => {
+  field.input.addEventListener('input', () => validateField(field));
 });
 
 displayBook();

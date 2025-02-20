@@ -26,15 +26,19 @@
   <dialog class="modal">
 
     <h2>Add a New Book</h2>
-    <form id="book-form">
+    <form id="book-form" novalidate>
+
       <label for="title">Title:</label>
       <input class="title-input" type="text" id="title" name="title" required>
+      <span id="title-error" style="color: red;"></span>
 
       <label for="author">Author:</label>
       <input class="author-input" type="text" id="author" name="author" required>
+      <span id="author-error" style="color: red;"></span>
 
       <label for="pages">Number of Pages:</label>
       <input class="number-input" type="number" id="pages" name="pages" required>
+      <span id="number-error" style="color: red;"></span>
 
       <fieldset>
         <legend>Have you read it?</legend>
@@ -46,9 +50,11 @@
             <input class="no-input" type="radio" id="read-no" name="read" value="No" required> No
           </label>
         </div>
+        <span id="radio-error" style="color: red;"></span>
       </fieldset>
 
       <button type="submit">Add Book</button>
+
     </form>
 
   </dialog>
